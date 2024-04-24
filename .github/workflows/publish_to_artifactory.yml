@@ -1,0 +1,30 @@
+name: Publish Gem to Zendesk's Artifactory
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  build:
+    name: Build & Publish Gem
+    runs-on: zendesk-stable
+
+    steps:
+      - uses: zendesk/checkout@v2
+      - name: Set up Ruby 2.7
+        uses: zendesk/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+      - name: Get Artifactory credentials
+        env:
+          ARTIFACTORY_API_KEY: ${{ secrets.ARTIFACTORY_API_KEY }}
+          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+        run: |
+          curl https://zdrepo.jfrog.io/artifactory/api/gems/gems-local/api/v1/api_key.yaml -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_API_KEY > $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+      - name: Build gem
+        run: |
+          gem build rdkafka.gemspec
+      - name: Publish to Artifactory
+        run: |
+          gem push rdkafka-*.gem --host https://zdrepo.jfrog.io/artifactory/api/gems/gems-local
