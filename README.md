@@ -1,9 +1,5 @@
 # Rdkafka
 
-[![Build Status](https://github.com/karafka/rdkafka-ruby/actions/workflows/ci.yml/badge.svg)](https://github.com/karafka/rdkafka-ruby/actions/workflows/ci.yml)
-[![Gem Version](https://badge.fury.io/rb/rdkafka.svg)](https://badge.fury.io/rb/rdkafka)
-[![Join the chat at https://slack.karafka.io](https://raw.githubusercontent.com/karafka/misc/master/slack.svg)](https://slack.karafka.io)
-
 > [!NOTE]
 > The `rdkafka-ruby` gem was created and developed by [AppSignal](https://www.appsignal.com/). Their impactful contributions have significantly shaped the Ruby Kafka and Karafka ecosystems. For robust monitoring, we highly recommend AppSignal.
 
